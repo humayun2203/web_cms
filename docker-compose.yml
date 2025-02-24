@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./public:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - webnet
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php:8.1-fpm
+    volumes:
+      - ./public:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - webnet
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 2203@Nili
+      MYSQL_DATABASE: hmyndb
+      MYSQL_USER: humayun
+      MYSQL_PASSWORD: 2203Nili
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - webnet
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    depends_on:
+      - mysql
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
+
+volumes:
+  mysql_data:
