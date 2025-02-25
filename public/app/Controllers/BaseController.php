@@ -55,16 +55,16 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
     }
-    
+
     protected function initialize()
     {
         $session = session();
-    
-        // Varsayılan dil Türkçe, ama kullanıcı bir dil seçtiyse onu al
-        $lang = $session->get('site_lang') ?? 'tr';
-    
-        // CodeIgniter'ın dilini ayarla
-        service('request')->setLocale($lang);
+
+    // Session'daki dili log'a yaz
+    log_message('debug', 'Session dili: ' . $session->get('site_lang'));
+
+    $lang = $session->get('site_lang') ?? 'tr'; // Varsayılan dil Türkçe
+    service('request')->setLocale($lang);
     }
     
 
