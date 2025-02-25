@@ -45,3 +45,8 @@ class AdminController extends Controller
         return redirect()->to(base_url('admin/login'));
     }
 }
+
+public function dashboard()
+{
+    return view('admin/dashboard');
+}
