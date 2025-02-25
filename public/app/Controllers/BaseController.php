@@ -55,4 +55,11 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
     }
+    protected function initialize()
+{
+    $session = session();
+    $lang = $session->get('site_lang') ?? 'en'; // Varsayılan dil Ingilizce
+    service('request')->setLocale($lang);
+}
+
 }

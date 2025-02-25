@@ -8,6 +8,10 @@
 </head>
 <body class="p-5">
     <div class="container">
+    <a href="<?= base_url('lang/tr'); ?>">🇹🇷 Türkçe</a> |
+    <a href="<?= base_url('lang/en'); ?>">🇬🇧 English</a> |
+    <a href="<?= base_url('lang/de'); ?>">🇩🇪 Deutsch</a>
+
         <h2>Admin Paneli</h2>
         <p>Hoş geldiniz, admin!</p>
         <a href="<?= base_url('admin/logout') ?>" class="btn btn-danger">Çıkış Yap</a>
