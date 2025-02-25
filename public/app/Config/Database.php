@@ -29,7 +29,7 @@ class Database extends Config
         'hostname' => 'web_cms-mysql-1',  // Docker içindeki MySQL container adı
         'username' => 'web_cms_user',
         'password' => 'web_cms_password',
-        'database' => 'web_cms',
+        'database' => 'hmyndb',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
