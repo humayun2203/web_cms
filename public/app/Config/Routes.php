@@ -11,5 +11,7 @@ $routes->get('admin/login', 'AdminController::login');
 $routes->post('admin/loginAuth', 'AdminController::loginAuth');
 $routes->get('admin/logout', 'AdminController::logout');
 $routes->get('admin/dashboard', 'AdminController::dashboard');
+$routes->get('lang/(:segment)', 'LanguageController::change/$1');
+
 
 
