@@ -8,7 +8,8 @@ class LanguageController extends Controller
     public function change($lang)
     {
         $session = session();
-
+        $request = service('request'); // Mevcut URL'yi almak için
+        
         // Desteklenen diller listesi
         $availableLanguages = ['tr', 'en', 'de'];
 
@@ -16,6 +17,8 @@ class LanguageController extends Controller
             $session->set('site_lang', $lang);
         }
 
-        return redirect()->back();
+        // Kullanıcının geldiği sayfaya yönlendir
+        $referer = $request->getServer('HTTP_REFERER') ?? base_url();
+        return redirect()->to($referer);
     }
 }
