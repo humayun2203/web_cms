@@ -24,7 +24,28 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public array $default = [
+    public $default = [
+        'DSN'      => '',
+        'hostname' => 'web_cms-mysql-1',  // Docker içindeki MySQL container adı
+        'username' => 'web_cms_user',
+        'password' => 'web_cms_password',
+        'database' => 'web_cms',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => (ENVIRONMENT !== 'production'),
+        'cacheOn'  => false,
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port'     => 3306,
+    ];
+    
+   /* public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
         'username'     => '',
@@ -50,7 +71,7 @@ class Database extends Config
             'time'     => 'H:i:s',
         ],
     ];
-
+*/
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
