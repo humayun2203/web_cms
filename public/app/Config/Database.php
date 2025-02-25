@@ -24,7 +24,7 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public $default = [
+    public array $default = [
         'DSN'      => '',
         'hostname' => 'mysql',  // Docker içindeki MySQL container adı
         'username' => 'humayun',
