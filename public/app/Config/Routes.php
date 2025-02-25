@@ -7,4 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('admin', 'Admin\AdminDashboard::index');
+$routes->get('admin/login', 'AdminController::login');
+$routes->post('admin/loginAuth', 'AdminController::loginAuth');
+$routes->get('admin/logout', 'AdminController::logout');
+
 
