@@ -26,7 +26,7 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'web_cms-mysql-1',  // Docker içindeki MySQL container adı
+        'hostname' => 'mysql',  // Docker içindeki MySQL container adı
         'username' => 'humayun',
         'password' => '2203Nili',
         'database' => 'hmyndb',
