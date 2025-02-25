@@ -46,8 +46,14 @@ class AdminController extends Controller
     }
 
 
-public function dashboard()
-{
-    return view('admin/dashboard');
-}
+    public function dashboard()
+    {
+        return view('admin/dashboard');
+    }
+    
+    public function testSession()
+    {
+        return view('admin/test_session');
+    }
+
 }
