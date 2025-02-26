@@ -74,15 +74,16 @@ abstract class BaseController extends Controller
         // Log ekleyerek kontrol edelim
         log_message('debug', 'Sayfa Açıldığında Seçili Dil: ' . $lang);
     
-        // CodeIgniter’ın dilini güncelle
-        $this->request->setLocale($lang);
-        
-        // CodeIgniter’ın çeviri sistemine de dili uygula
-        $this->language = \Config\Services::language();
-        $this->language->setLocale($lang);
+        // CodeIgniter’ın dilini değiştir
+        service('request')->setLocale($lang);
     
-        log_message('debug', 'setLocale() Sonrası Dil: ' . $this->language->getLocale());
+        // CodeIgniter'ın çeviri servisini çağırarak dili değiştir
+        $languageService = \Config\Services::language();
+        $languageService->setLocale($lang);
+    
+        log_message('debug', 'setLocale() Sonrası Dil: ' . $languageService->getLocale());
     }
+    
     
     
     
