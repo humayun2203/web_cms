@@ -63,15 +63,17 @@ abstract class BaseController extends Controller
         // Session'daki dili al
         $lang = $session->get('site_lang') ?? 'tr';
     
-        // CodeIgniter dilini değiştirme işlemini log'a yaz
-        log_message('debug', 'Dil Ayarı Yapılmaya Çalışılıyor: ' . $lang);
+        // CodeIgniter'ın kendi `setLocale()` fonksiyonunu devre dışı bırakıp dil dosyasını manuel yükleyelim
+        $this->request->setLocale($lang);
+        
+        // CodeIgniter çeviri sisteminin aktif olması için manuel olarak dil dosyalarını yükleyelim
+        $this->lang = \Config\Services::language();
+        $this->lang->setLocale($lang);
     
-        // CodeIgniter’ın dilini değiştir
-        service('request')->setLocale($lang);
-    
-        // Uygulanan dili tekrar log'a yaz
-        log_message('debug', 'setLocale() Sonrası Dil: ' . service('request')->getLocale());
+        // Log kaydı ekleyelim
+        log_message('debug', 'Manuel Dil Ayarlandı: ' . $lang);
     }
+    
     
 
     
