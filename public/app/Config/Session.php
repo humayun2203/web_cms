@@ -58,7 +58,7 @@ class Session extends BaseConfig
      * IMPORTANT: You are REQUIRED to set a valid save path!
      */
     /* public string $savePath = WRITEPATH . 'session';*/
-    public string $savePath = '/home/humayun/web_cms/public/writable/session/';
+       public string $savePath = '/var/www/html/writable/session/';
 
     /**
      * --------------------------------------------------------------------------
