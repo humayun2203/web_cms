@@ -60,12 +60,17 @@ abstract class BaseController extends Controller
     {
         $session = session();
 
-    // Session'daki dili log'a yaz
-    log_message('debug', 'Session dili: ' . $session->get('site_lang'));
+        // Session'daki dili al
+        $lang = $session->get('site_lang') ?? 'tr';
 
-    $lang = $session->get('site_lang') ?? 'tr'; // Varsayılan dil Türkçe
-    service('request')->setLocale($lang);
+        // Seçili dili log dosyasına yazdır
+        log_message('debug', 'Sayfa Yüklenirken Seçili Dil: ' . $lang);
+
+        // CodeIgniter’ın dilini değiştir
+        service('request')->setLocale($lang);
     }
+
+
     
 
 }
