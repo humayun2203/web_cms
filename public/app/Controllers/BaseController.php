@@ -59,17 +59,20 @@ abstract class BaseController extends Controller
     protected function initialize()
     {
         $session = session();
-
+    
         // Session'daki dili al
         $lang = $session->get('site_lang') ?? 'tr';
-
-        // Seçili dili log dosyasına yazdır
-        log_message('debug', 'Sayfa Yüklenirken Seçili Dil: ' . $lang);
-
+    
+        // CodeIgniter dilini değiştirme işlemini log'a yaz
+        log_message('debug', 'Dil Ayarı Yapılmaya Çalışılıyor: ' . $lang);
+    
         // CodeIgniter’ın dilini değiştir
         service('request')->setLocale($lang);
+    
+        // Uygulanan dili tekrar log'a yaz
+        log_message('debug', 'setLocale() Sonrası Dil: ' . service('request')->getLocale());
     }
-
+    
 
     
 
