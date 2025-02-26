@@ -1,9 +1,12 @@
 <?php
+// Manuel olarak Set-Cookie başlığını gönderelim
+header('Set-Cookie: test_cookie=TestValue; Path=/; HttpOnly; SameSite=Lax');
+
 // Session çerez ayarlarını düzelt
 session_set_cookie_params([
     'lifetime' => 86400,  // 1 Gün
     'path' => '/',
-    'domain' => '',  // Eğer subdomain kullanıyorsan buraya ana domaini yaz
+    'domain' => '',
     'secure' => false,  // HTTPS kullanıyorsan true yap
     'httponly' => true,
     'samesite' => 'Lax'
