@@ -28,12 +28,12 @@ class LanguageController extends Controller
     
         if (in_array($lang, $availableLanguages)) {
             $session->set('site_lang', $lang);
+            log_message('debug', 'Session’a Yeni Dil Kaydedildi: ' . $session->get('site_lang'));
         }
     
-        // Session içeriğini log dosyasına yazdıralım
-        log_message('debug', 'Dil değiştirildi: ' . $session->get('site_lang'));
-    
-        return redirect()->back();
+        $referer = service('request')->getServer('HTTP_REFERER') ?? base_url();
+        return redirect()->to($referer);
     }
+    
     
 }
