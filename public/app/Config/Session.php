@@ -8,121 +8,32 @@ use CodeIgniter\Session\Handlers\FileHandler;
 
 class Session extends BaseConfig
 {
-    /**
-     * --------------------------------------------------------------------------
-     * Session Driver
-     * --------------------------------------------------------------------------
-     *
-     * The session storage driver to use:
-     * - `CodeIgniter\Session\Handlers\FileHandler`
-     * - `CodeIgniter\Session\Handlers\DatabaseHandler`
-     * - `CodeIgniter\Session\Handlers\MemcachedHandler`
-     * - `CodeIgniter\Session\Handlers\RedisHandler`
-     *
-     * @var class-string<BaseHandler>
-     */
     public string $driver = FileHandler::class;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Cookie Name
-     * --------------------------------------------------------------------------
-     *
-     * The session cookie name, must contain only [0-9a-z_-] characters
-     */
     public string $cookieName = 'ci_session';
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Expiration
-     * --------------------------------------------------------------------------
-     *
-     * The number of SECONDS you want the session to last.
-     * Setting to 0 (zero) means expire when the browser is closed.
-     */
-    public int $expiration = 7200;
+    // **Oturum süresini uzat (24 saat)**
+    public int $expiration = 86400;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Save Path
-     * --------------------------------------------------------------------------
-     *
-     * The location to save sessions to and is driver dependent.
-     *
-     * For the 'files' driver, it's a path to a writable directory.
-     * WARNING: Only absolute paths are supported!
-     *
-     * For the 'database' driver, it's a table name.
-     * Please read up the manual for the format with other session drivers.
-     *
-     * IMPORTANT: You are REQUIRED to set a valid save path!
-     */
-    /* public string $savePath = WRITEPATH . 'session';*/
-       public string $savePath = '/var/www/html/writable/session/';
+    // **Session'ın kaydedileceği dizini belirle**
+    public string $savePath = '/var/www/html/writable/session/';
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Match IP
-     * --------------------------------------------------------------------------
-     *
-     * Whether to match the user's IP address when reading the session data.
-     *
-     * WARNING: If you're using the database driver, don't forget to update
-     *          your session table's PRIMARY KEY when changing this setting.
-     */
+    // **IP adresi ile eşleşmeyi kapat (Bazı sunucular IP değiştirebilir)**
     public bool $matchIP = false;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Time to Update
-     * --------------------------------------------------------------------------
-     *
-     * How many seconds between CI regenerating the session ID.
-     */
-    public int $timeToUpdate = 300;
+    // **Session ID yenileme süresini uzat (10 dakika)**
+    public int $timeToUpdate = 600;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Regenerate Destroy
-     * --------------------------------------------------------------------------
-     *
-     * Whether to destroy session data associated with the old session ID
-     * when auto-regenerating the session ID. When set to FALSE, the data
-     * will be later deleted by the garbage collector.
-     */
+    // **Session ID değiştirildiğinde eski datayı silme**
     public bool $regenerateDestroy = false;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Session Database Group
-     * --------------------------------------------------------------------------
-     *
-     * DB Group for the database session.
-     */
     public ?string $DBGroup = null;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Lock Retry Interval (microseconds)
-     * --------------------------------------------------------------------------
-     *
-     * This is used for RedisHandler.
-     *
-     * Time (microseconds) to wait if lock cannot be acquired.
-     * The default is 100,000 microseconds (= 0.1 seconds).
-     */
-    public int $lockRetryInterval = 100_000;
+    // **Güvenlik Ayarları**
+    public bool $cookieSecure = false;
+    public bool $cookieHTTPOnly = true;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Lock Max Retries
-     * --------------------------------------------------------------------------
-     *
-     * This is used for RedisHandler.
-     *
-     * Maximum number of lock acquisition attempts.
-     * The default is 300 times. That is lock timeout is about 30 (0.1 * 300)
-     * seconds.
-     */
+    // **RedisHandler için (Eğer kullanılacaksa)**
+    public int $lockRetryInterval = 100_000;
     public int $lockMaxRetries = 300;
 }
