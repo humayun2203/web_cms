@@ -25,10 +25,12 @@ class LanguageController extends Controller
     {
         $session = session();
         $availableLanguages = ['tr', 'en', 'de'];
-    
+        
         if (in_array($lang, $availableLanguages)) {
             $session->set('site_lang', $lang);
             log_message('debug', 'Session’a Yeni Dil Kaydedildi: ' . $session->get('site_lang'));
+            log_message('debug', 'Session’a Yeni Dil Kaydedildi: ' . session()->get('site_lang'));
+
         }
     
         $referer = service('request')->getServer('HTTP_REFERER') ?? base_url();
