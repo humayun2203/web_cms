@@ -8,6 +8,9 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use CodeIgniter\I18n\Time;
+use CodeIgniter\Language\Language;
+
 
 /**
  * Class BaseController
@@ -60,19 +63,27 @@ abstract class BaseController extends Controller
     {
         $session = session();
     
-        // Session'daki dili al
-        $lang = $session->get('site_lang') ?? 'tr';
+        // Eğer session içinde dil tanımlı değilse, varsayılan olarak tr'yi ata
+        if (!$session->has('site_lang')) {
+            $session->set('site_lang', 'tr');
+        }
     
-        // CodeIgniter'ın kendi `setLocale()` fonksiyonunu devre dışı bırakıp dil dosyasını manuel yükleyelim
+        // Session'dan dili al
+        $lang = $session->get('site_lang');
+    
+        // Log ekleyerek kontrol edelim
+        log_message('debug', 'Sayfa Açıldığında Seçili Dil: ' . $lang);
+    
+        // CodeIgniter’ın dilini güncelle
         $this->request->setLocale($lang);
         
-        // CodeIgniter çeviri sisteminin aktif olması için manuel olarak dil dosyalarını yükleyelim
-        $this->lang = \Config\Services::language();
-        $this->lang->setLocale($lang);
+        // CodeIgniter’ın çeviri sistemine de dili uygula
+        $this->language = \Config\Services::language();
+        $this->language->setLocale($lang);
     
-        // Log kaydı ekleyelim
-        log_message('debug', 'Manuel Dil Ayarlandı: ' . $lang);
+        log_message('debug', 'setLocale() Sonrası Dil: ' . $this->language->getLocale());
     }
+    
     
     
 
