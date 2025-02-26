@@ -84,18 +84,19 @@ abstract class BaseController extends Controller
         log_message('debug', 'setLocale() Sonrası Dil: ' . $languageService->getLocale());
     } */
     protected function initialize()
-    {
-        $session = session();
-    
-        if (!$session->has('site_lang')) {
-            $session->set('site_lang', 'tr'); // Varsayılan dil
-            log_message('debug', 'Varsayılan Dil Ayarlandı: tr');
+        {
+            $session = session();
+
+            if (!$session->has('site_lang')) {
+                $session->set('site_lang', 'tr'); // Varsayılan dil
+                log_message('debug', 'Varsayılan Dil Ayarlandı: tr');
+            }
+
+            log_message('debug', 'Sayfa Açıldığında Seçili Dil: ' . $session->get('site_lang'));
+
+            service('request')->setLocale($session->get('site_lang'));
         }
-    
-        log_message('debug', 'Sayfa Açıldığında Seçili Dil: ' . $session->get('site_lang'));
-    
-        service('request')->setLocale($session->get('site_lang'));
-    }
+
     
     
     
