@@ -1,19 +1,18 @@
 <?php
-// Manuel olarak Set-Cookie başlığını gönderelim
-header('Set-Cookie: test_cookie=TestValue; Path=/; HttpOnly; SameSite=Lax');
-
-// Session çerez ayarlarını düzelt
-session_set_cookie_params([
-    'lifetime' => 86400,  // 1 Gün
-    'path' => '/',
-    'domain' => '',
-    'secure' => false,  // HTTPS kullanıyorsan true yap
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-
 session_start();
-$_SESSION['test'] = 'Session Çalışıyor!';
 
-echo 'Session ID: ' . session_id();
+// Tarayıcının gönderdiği session ID
+$browserSessionID = $_COOKIE['ci_session'] ?? 'Tarayıcı çerezi yok';
+
+// PHP tarafından kullanılan session ID
+$phpSessionID = session_id();
+
+echo "Tarayıcıdaki Session ID: " . $browserSessionID . "<br>";
+echo "PHP'nin Kullanılan Session ID: " . $phpSessionID . "<br>";
+
+if ($browserSessionID === $phpSessionID) {
+    echo "<br>✅ Session ID'ler eşleşiyor! Her şey normal.";
+} else {
+    echo "<br>❌ Session ID'ler farklı! PHP tarayıcıdan gelen session'ı kabul etmiyor.";
+}
 ?>
