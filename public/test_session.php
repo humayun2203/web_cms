@@ -1,18 +1,21 @@
 <?php
 session_start();
 
-// Tarayıcının gönderdiği session ID
+// Tarayıcıdan gelen session ID ile PHP session ID'yi karşılaştıralım
 $browserSessionID = $_COOKIE['ci_session'] ?? 'Tarayıcı çerezi yok';
-
-// PHP tarafından kullanılan session ID
 $phpSessionID = session_id();
 
 echo "Tarayıcıdaki Session ID: " . $browserSessionID . "<br>";
 echo "PHP'nin Kullanılan Session ID: " . $phpSessionID . "<br>";
 
-if ($browserSessionID === $phpSessionID) {
-    echo "<br>✅ Session ID'ler eşleşiyor! Her şey normal.";
-} else {
-    echo "<br>❌ Session ID'ler farklı! PHP tarayıcıdan gelen session'ı kabul etmiyor.";
+// Session içine veri kaydedelim
+if (!isset($_SESSION['test_data'])) {
+    $_SESSION['test_data'] = "Bu session içinde saklanan bir test verisidir!";
 }
+
+// Session içeriğini gösterelim
+echo "<br><strong>PHP Session İçeriği:</strong><br>";
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 ?>
